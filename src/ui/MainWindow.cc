@@ -494,13 +494,13 @@ void MainWindow::buildPxWidgets()
 
     // Dock widgets
 
-    if (!detectionDockWidget)
-    {
-        detectionDockWidget = new QDockWidget(tr("Object Recognition"), this);
-        detectionDockWidget->setWidget( new ObjectDetectionView("images/patterns", this) );
-        detectionDockWidget->setObjectName("OBJECT_DETECTION_DOCK_WIDGET");
-        addToToolsMenu (detectionDockWidget, tr("Object Recognition"), SLOT(showToolWidget(bool)), MENU_DETECTION, Qt::RightDockWidgetArea);
-    }
+//    if (!detectionDockWidget)
+//    {
+//        detectionDockWidget = new QDockWidget(tr("Object Recognition"), this);
+//        detectionDockWidget->setWidget( new ObjectDetectionView("images/patterns", this) );
+//        detectionDockWidget->setObjectName("OBJECT_DETECTION_DOCK_WIDGET");
+//        addToToolsMenu (detectionDockWidget, tr("Object Recognition"), SLOT(showToolWidget(bool)), MENU_DETECTION, Qt::RightDockWidgetArea);
+//    }
 
     if (!parametersDockWidget)
     {
@@ -510,37 +510,37 @@ void MainWindow::buildPxWidgets()
         addToToolsMenu (parametersDockWidget, tr("Calibration and Parameters"), SLOT(showToolWidget(bool)), MENU_PARAMETERS, Qt::RightDockWidgetArea);
     }
 
-    if (!watchdogControlDockWidget)
-    {
-        watchdogControlDockWidget = new QDockWidget(tr("Process Control"), this);
-        watchdogControlDockWidget->setWidget( new WatchdogControl(this) );
-        watchdogControlDockWidget->setObjectName("WATCHDOG_CONTROL_DOCKWIDGET");
-        addToToolsMenu (watchdogControlDockWidget, tr("Process Control"), SLOT(showToolWidget(bool)), MENU_WATCHDOG, Qt::BottomDockWidgetArea);
-    }
+//    if (!watchdogControlDockWidget)
+//    {
+//        watchdogControlDockWidget = new QDockWidget(tr("Process Control"), this);
+//        watchdogControlDockWidget->setWidget( new WatchdogControl(this) );
+//        watchdogControlDockWidget->setObjectName("WATCHDOG_CONTROL_DOCKWIDGET");
+//        addToToolsMenu (watchdogControlDockWidget, tr("Process Control"), SLOT(showToolWidget(bool)), MENU_WATCHDOG, Qt::BottomDockWidgetArea);
+//    }
 
-    if (!hsiDockWidget)
-    {
-        hsiDockWidget = new QDockWidget(tr("Horizontal Situation Indicator"), this);
-        hsiDockWidget->setWidget( new HSIDisplay(this) );
-        hsiDockWidget->setObjectName("HORIZONTAL_SITUATION_INDICATOR_DOCK_WIDGET");
-        addToToolsMenu (hsiDockWidget, tr("Horizontal Situation"), SLOT(showToolWidget(bool)), MENU_HSI, Qt::BottomDockWidgetArea);
-    }
+//    if (!hsiDockWidget)
+//    {
+//        hsiDockWidget = new QDockWidget(tr("Horizontal Situation Indicator"), this);
+//        hsiDockWidget->setWidget( new HSIDisplay(this) );
+//        hsiDockWidget->setObjectName("HORIZONTAL_SITUATION_INDICATOR_DOCK_WIDGET");
+//        addToToolsMenu (hsiDockWidget, tr("Horizontal Situation"), SLOT(showToolWidget(bool)), MENU_HSI, Qt::BottomDockWidgetArea);
+//    }
 
-    if (!headDown1DockWidget)
-    {
-        headDown1DockWidget = new QDockWidget(tr("Flight Display"), this);
-        headDown1DockWidget->setWidget( new HDDisplay(acceptList, "Flight Display", this) );
-        headDown1DockWidget->setObjectName("HEAD_DOWN_DISPLAY_1_DOCK_WIDGET");
-        addToToolsMenu (headDown1DockWidget, tr("Flight Display"), SLOT(showToolWidget(bool)), MENU_HDD_1, Qt::RightDockWidgetArea);
-    }
+//    if (!headDown1DockWidget)
+//    {
+//        headDown1DockWidget = new QDockWidget(tr("Flight Display"), this);
+//        headDown1DockWidget->setWidget( new HDDisplay(acceptList, "Flight Display", this) );
+//        headDown1DockWidget->setObjectName("HEAD_DOWN_DISPLAY_1_DOCK_WIDGET");
+//        addToToolsMenu (headDown1DockWidget, tr("Flight Display"), SLOT(showToolWidget(bool)), MENU_HDD_1, Qt::RightDockWidgetArea);
+//    }
 
-    if (!headDown2DockWidget)
-    {
-        headDown2DockWidget = new QDockWidget(tr("Actuator Status"), this);
-        headDown2DockWidget->setWidget( new HDDisplay(acceptList2, "Actuator Status", this) );
-        headDown2DockWidget->setObjectName("HEAD_DOWN_DISPLAY_2_DOCK_WIDGET");
-        addToToolsMenu (headDown2DockWidget, tr("Actuator Status"), SLOT(showToolWidget(bool)), MENU_HDD_2, Qt::RightDockWidgetArea);
-    }
+//    if (!headDown2DockWidget)
+//    {
+//        headDown2DockWidget = new QDockWidget(tr("Actuator Status"), this);
+//        headDown2DockWidget->setWidget( new HDDisplay(acceptList2, "Actuator Status", this) );
+//        headDown2DockWidget->setObjectName("HEAD_DOWN_DISPLAY_2_DOCK_WIDGET");
+//        addToToolsMenu (headDown2DockWidget, tr("Actuator Status"), SLOT(showToolWidget(bool)), MENU_HDD_2, Qt::RightDockWidgetArea);
+//    }
 
     if (!rcViewDockWidget)
     {
@@ -558,29 +558,29 @@ void MainWindow::buildPxWidgets()
         addToToolsMenu (headUpDockWidget, tr("Head Up Display"), SLOT(showToolWidget(bool)), MENU_HUD, Qt::RightDockWidgetArea);
     }
 
-    if (!video1DockWidget)
-    {
-        video1DockWidget = new QDockWidget(tr("Video Stream 1"), this);
-        HUD* video1 =  new HUD(160, 120, this);
-        video1->enableHUDInstruments(false);
-        video1->enableVideo(true);
-        // FIXME select video stream as well
-        video1DockWidget->setWidget(video1);
-        video1DockWidget->setObjectName("VIDEO_STREAM_1_DOCK_WIDGET");
-        addToToolsMenu (video1DockWidget, tr("Video Stream 1"), SLOT(showToolWidget(bool)), MENU_VIDEO_STREAM_1, Qt::LeftDockWidgetArea);
-    }
+//    if (!video1DockWidget)
+//    {
+//        video1DockWidget = new QDockWidget(tr("Video Stream 1"), this);
+//        HUD* video1 =  new HUD(160, 120, this);
+//        video1->enableHUDInstruments(false);
+//        video1->enableVideo(true);
+//        // FIXME select video stream as well
+//        video1DockWidget->setWidget(video1);
+//        video1DockWidget->setObjectName("VIDEO_STREAM_1_DOCK_WIDGET");
+//        addToToolsMenu (video1DockWidget, tr("Video Stream 1"), SLOT(showToolWidget(bool)), MENU_VIDEO_STREAM_1, Qt::LeftDockWidgetArea);
+//    }
 
-    if (!video2DockWidget)
-    {
-        video2DockWidget = new QDockWidget(tr("Video Stream 2"), this);
-        HUD* video2 =  new HUD(160, 120, this);
-        video2->enableHUDInstruments(false);
-        video2->enableVideo(true);
-        // FIXME select video stream as well
-        video2DockWidget->setWidget(video2);
-        video2DockWidget->setObjectName("VIDEO_STREAM_2_DOCK_WIDGET");
-        addToToolsMenu (video2DockWidget, tr("Video Stream 2"), SLOT(showToolWidget(bool)), MENU_VIDEO_STREAM_2, Qt::LeftDockWidgetArea);
-    }
+//    if (!video2DockWidget)
+//    {
+//        video2DockWidget = new QDockWidget(tr("Video Stream 2"), this);
+//        HUD* video2 =  new HUD(160, 120, this);
+//        video2->enableHUDInstruments(false);
+//        video2->enableVideo(true);
+//        // FIXME select video stream as well
+//        video2DockWidget->setWidget(video2);
+//        video2DockWidget->setObjectName("VIDEO_STREAM_2_DOCK_WIDGET");
+//        addToToolsMenu (video2DockWidget, tr("Video Stream 2"), SLOT(showToolWidget(bool)), MENU_VIDEO_STREAM_2, Qt::LeftDockWidgetArea);
+//    }
 
     // Dialogue widgets
     //FIXME: free memory in destructor
