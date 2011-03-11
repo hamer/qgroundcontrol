@@ -63,7 +63,7 @@ namespace qmapcontrol
     void MapNetwork::requestFinished(int id, bool error)
     {
         // sleep(1);
-        qDebug() << "QMapControl: MapNetwork::requestFinished" << http->state() << ", id: " << id;
+        //qDebug() << "QMapControl: MapNetwork::requestFinished" << http->state() << ", id: " << id;
         if (error)
         {
             qDebug() << "QMapControl: network error: " << http->errorString();
@@ -87,28 +87,28 @@ namespace qmapcontrol
                     QPixmap pm;
                     ax = http->readAll();
 
-                    qDebug() << "QMapControl: Request consisted of " << ax.size() << "bytes";
+                    //qDebug() << "QMapControl: Request consisted of " << ax.size() << "bytes";
 
                     if (pm.loadFromData(ax))
                     {
                         loaded += pm.size().width()*pm.size().height()*pm.depth()/8/1024;
-                        qDebug() << "QMapControl: Network loaded: " << (loaded);
+                        //qDebug() << "QMapControl: Network loaded: " << (loaded);
                         parent->receivedImage(pm, url);
                     }
                     else if (pm.width() == 0 || pm.height() == 0)
                     {
                         // Silently ignore map request for a
                         // 0xn pixel map
-                        qDebug() << "QMapControl: IGNORED 0x0 pixel map request, widthxheight:" << pm.width() << "x" << pm.height();
-                        qDebug() << "QMapControl: HTML ERROR MESSAGE:" << ax << "at " << __FILE__ << __LINE__;
+                        //qDebug() << "QMapControl: IGNORED 0x0 pixel map request, widthxheight:" << pm.width() << "x" << pm.height();
+                        //qDebug() << "QMapControl: HTML ERROR MESSAGE:" << ax << "at " << __FILE__ << __LINE__;
                     }
                     else
                     {
                         // QGC FIXME Error is currently undetected
                         // TODO Error is currently undetected
                         //qDebug() << "NETWORK_PIXMAP_ERROR: " << ax;
-                        qDebug() << "QMapControl external library: ERROR loading map:" << "width:" << pm.width() << "heigh:" << pm.height() << "at " << __FILE__ << __LINE__;
-                        qDebug() << "QMapControl: HTML ERROR MESSAGE:" << ax << "at " << __FILE__ << __LINE__;
+                        //qDebug() << "QMapControl external library: ERROR loading map:" << "width:" << pm.width() << "heigh:" << pm.height() << "at " << __FILE__ << __LINE__;
+                        //qDebug() << "QMapControl: HTML ERROR MESSAGE:" << ax << "at " << __FILE__ << __LINE__;
                     }
                 }
 
