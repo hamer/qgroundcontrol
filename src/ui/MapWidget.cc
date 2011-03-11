@@ -54,7 +54,7 @@ void MapWidget::init()
         setLayout(layout);
 
         //   VISUAL MAP STYLE
-        QString buttonStyle("QAbstractButton { background-color: rgba(20, 20, 20, 45%); border-color: rgba(10, 10, 10, 50%)} QAbstractButton:checked { border: 2px solid #379AC3; }");
+        QString buttonStyle("QAbstractButton { background-color: rgba(20, 20, 20, 45%); border-color: rgba(10, 10, 10, 50%); color: rgb(192,192,192)} QAbstractButton:checked { border: 2px solid #379AC3; }");
         mc->setPen(QGC::colorCyan.darker(400));
 
         waypointIsDrag = false;
