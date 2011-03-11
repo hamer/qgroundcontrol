@@ -443,7 +443,7 @@ void QGCParamWidget::addParameter(int uas, int component, QString parameterName,
         //tree->expandAll();
     }
     // Reset background color
-    parameterItem->setBackground(0, QBrush(QColor(0, 0, 0)));
+    parameterItem->setBackground(0, palette().brush(QPalette::Base));
     parameterItem->setBackground(1, Qt::NoBrush);
     //tree->update();
     if (changedValues.contains(component)) changedValues.value(component)->remove(parameterName);
