@@ -37,6 +37,17 @@ QGCSensorSettingsWidget::QGCSensorSettingsWidget(UASInterface* uas, QWidget *par
     ui(new Ui::QGCSensorSettingsWidget)
 {
     ui->setupUi(this);
+
+    // checkboxes< that enables/disables following spinboxes
+    connect(ui->checkBox_rawSensor, SIGNAL(stateChanged(int)), this, SLOT(spinRawSensorEnable(int)));
+    connect(ui->checkBox_extended, SIGNAL(stateChanged(int)), this, SLOT(spinExtendedEnable(int)));
+    connect(ui->checkBox_position, SIGNAL(stateChanged(int)), this, SLOT(spinPositionEnable(int)));
+    connect(ui->checkBox_controller, SIGNAL(stateChanged(int)), this, SLOT(spinControllerEnable(int)));
+    connect(ui->checkBox_rc, SIGNAL(stateChanged(int)), this, SLOT(spinRcEnable(int)));
+    connect(ui->checkBox_extra1, SIGNAL(stateChanged(int)), this, SLOT(spinExtra1Enable(int)));
+    connect(ui->checkBox_extra2, SIGNAL(stateChanged(int)), this, SLOT(spinExtra2Enable(int)));
+    connect(ui->checkBox_extra3, SIGNAL(stateChanged(int)), this, SLOT(spinExtra3Enable(int)));
+
     // FIXME James Goppert
     // XXX: This might be a bad idea sending a message every time the value changes
     connect(ui->spinBox_rawSensor, SIGNAL(valueChanged(int)), mav, SLOT(enableRawSensorDataTransmission(int)));
@@ -69,5 +80,117 @@ void QGCSensorSettingsWidget::changeEvent(QEvent *e)
         break;
     default:
         break;
+    }
+}
+
+void QGCSensorSettingsWidget::spinRawSensorEnable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enableRawSensorDataTransmission(0); // stop data stream
+        ui->spinBox_rawSensor->setEnabled(false);
+    }
+    else
+    {
+        mav->enableRawSensorDataTransmission(ui->spinBox_rawSensor->value());
+        ui->spinBox_rawSensor->setEnabled(true);
+    }
+}
+
+void QGCSensorSettingsWidget::spinExtendedEnable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enableExtendedSystemStatusTransmission(0); // stop data stream
+        ui->spinBox_extended->setEnabled(false);
+    }
+    else
+    {
+        mav->enableExtendedSystemStatusTransmission(ui->spinBox_extended->value());
+        ui->spinBox_extended->setEnabled(true);
+    }
+}
+
+void QGCSensorSettingsWidget::spinPositionEnable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enablePositionTransmission(0); // stop data stream
+        ui->spinBox_position->setEnabled(false);
+    }
+    else
+    {
+        mav->enablePositionTransmission(ui->spinBox_position->value());
+        ui->spinBox_position->setEnabled(true);
+    }
+}
+
+void QGCSensorSettingsWidget::spinControllerEnable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enableRawControllerDataTransmission(0); // stop data stream
+        ui->spinBox_controller->setEnabled(false);
+    }
+    else
+    {
+        mav->enableRawControllerDataTransmission(ui->spinBox_controller->value());
+        ui->spinBox_controller->setEnabled(true);
+    }
+}
+
+void QGCSensorSettingsWidget::spinRcEnable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enableRCChannelDataTransmission(0); // stop data stream
+        ui->spinBox_rc->setEnabled(false);
+    }
+    else
+    {
+        mav->enableRCChannelDataTransmission(ui->spinBox_rc->value());
+        ui->spinBox_rc->setEnabled(true);
+    }
+}
+
+void QGCSensorSettingsWidget::spinExtra1Enable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enableExtra1Transmission(0); // stop data stream
+        ui->spinBox_extra1->setEnabled(false);
+    }
+    else
+    {
+        mav->enableExtra1Transmission(ui->spinBox_extra1->value());
+        ui->spinBox_extra1->setEnabled(true);
+    }
+}
+
+void QGCSensorSettingsWidget::spinExtra2Enable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enableExtra2Transmission(0); // stop data stream
+        ui->spinBox_extra2->setEnabled(false);
+    }
+    else
+    {
+        mav->enableExtra2Transmission(ui->spinBox_extra2->value());
+        ui->spinBox_extra2->setEnabled(true);
+    }
+}
+
+void QGCSensorSettingsWidget::spinExtra3Enable(int state) // slot for checkbox
+{
+    if (state == Qt::Unchecked) // disabled
+    {
+        mav->enableExtra3Transmission(0); // stop data stream
+        ui->spinBox_extra3->setEnabled(false);
+    }
+    else
+    {
+        mav->enableExtra3Transmission(ui->spinBox_extra3->value());
+        ui->spinBox_extra3->setEnabled(true);
     }
 }

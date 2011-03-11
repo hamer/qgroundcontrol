@@ -48,6 +48,16 @@ protected:
     UASInterface* mav;
     void changeEvent(QEvent *e);
 
+protected slots:
+    void spinRawSensorEnable(int state);
+    void spinExtendedEnable(int state);
+    void spinPositionEnable(int state);
+    void spinControllerEnable(int state);
+    void spinRcEnable(int state);
+    void spinExtra1Enable(int state);
+    void spinExtra2Enable(int state);
+    void spinExtra3Enable(int state);
+
 private:
     Ui::QGCSensorSettingsWidget *ui;
 };
