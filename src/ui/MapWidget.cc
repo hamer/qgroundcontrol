@@ -105,12 +105,14 @@ void MapWidget::init()
         int lastZoom = 16;
         double lastLat = 47.376889;
         double lastLon = 8.548056;
+        unsigned lastProvider = 4;
 
         QSettings settings;
         settings.beginGroup("QGC_MAPWIDGET");
         lastLat = settings.value("LAST_LATITUDE", lastLat).toDouble();
         lastLon = settings.value("LAST_LONGITUDE", lastLon).toDouble();
         lastZoom = settings.value("LAST_ZOOM", lastZoom).toInt();
+        lastProvider = settings.value("LAST_PROVIDER", lastProvider).toInt();
         settings.endGroup();
 
         // SET INITIAL POSITION AND ZOOM
@@ -134,7 +136,16 @@ void MapWidget::init()
         yahooActionSatellite->setCheckable(true);
         googleActionMap->setCheckable(true);
         googleSatAction->setCheckable(true);
-        googleSatAction->setChecked(true);
+
+        provList << osmAction << yahooActionMap << yahooActionSatellite << googleActionMap << googleSatAction;
+        if (lastProvider < provList.count())
+        {
+            qDebug() << lastProvider;
+            provList[lastProvider]->setChecked(true);
+        }
+        else
+            googleSatAction->setChecked(true);
+
         connect(mapproviderGroup, SIGNAL(triggered(QAction*)),
                 this, SLOT(mapproviderSelected(QAction*)));
 
@@ -285,6 +296,8 @@ void MapWidget::init()
         connect(geomLayer, SIGNAL(geometryEndDrag(Geometry*, QPointF)),
                 this, SLOT(captureGeometryEndDrag(Geometry*, QPointF)));
 
+        mapproviderSelected(provList[lastProvider]);
+
         qDebug() << "CHECK END";
     }
 }
@@ -319,6 +332,8 @@ void MapWidget::mapproviderSelected(QAction* action)
 {
     if (mc)
     {
+        provIdx = provList.indexOf(action);
+
         //delete mapadapter;
         mapButton->setText(action->text());
         if (action == osmAction)
@@ -1102,6 +1117,7 @@ void MapWidget::hideEvent(QHideEvent* event)
         settings.setValue("LAST_LATITUDE", currentPos.y());
         settings.setValue("LAST_LONGITUDE", currentPos.x());
         settings.setValue("LAST_ZOOM", mc->currentZoom());
+        settings.setValue("LAST_PROVIDER", provIdx);
         settings.endGroup();
         settings.sync();
     }

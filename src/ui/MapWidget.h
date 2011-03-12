@@ -177,6 +177,8 @@ private:
     Ui::MapWidget *m_ui;
     QList<qmapcontrol::Point*> wps;
     QList<Waypoint2DIcon*>wpIcons;
+    QList<QAction*> provList;
+    int provIdx;
     qmapcontrol::LineString* waypointPath;
     //QHash <QString, qmapcontrol::Point*> wpIndex;
     QPen* pointPen;
