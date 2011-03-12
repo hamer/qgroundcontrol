@@ -12,7 +12,7 @@ Compas::Compas(QWidget *parent) :
     heading(0)
 {
     setRose(new QwtSimpleCompassRose(4, 1));
-    setNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, false, Qt::red));
+    setNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, true, Qt::red));
     setReadOnly(true);
 }
 
