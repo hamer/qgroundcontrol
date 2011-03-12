@@ -584,6 +584,15 @@ void MainWindow::buildPxWidgets()
 
     // Dialogue widgets
     //FIXME: free memory in destructor
+
+    if (!compassDockWidget)
+    {
+        Compas *compass = new Compas(this);
+        connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), compass, SLOT(setActiveUAS(UASInterface*)));
+        compassDockWidget = new QDockWidget(tr("Compass"), this);
+        compassDockWidget->setWidget(compass);
+        addToToolsMenu(compassDockWidget, tr("Compass"), SLOT(showToolWidget(bool)), MENU_COMPASS, Qt::RightDockWidgetArea);
+    }
 }
 
 void MainWindow::buildSlugsWidgets()
