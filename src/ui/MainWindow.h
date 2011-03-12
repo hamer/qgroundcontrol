@@ -76,6 +76,8 @@ This file is part of the QGROUNDCONTROL project
 
 #include "SlugsVideoCamControl.h"
 
+#include "Compas.h"
+
 
 /**
  * @brief Main Application Window
@@ -233,6 +235,7 @@ protected:
       MENU_MAVLINK_LOG_PLAYER,
       MENU_VIDEO_STREAM_1,
       MENU_VIDEO_STREAM_2,
+      MENU_COMPASS,
       CENTRAL_SEPARATOR= 255, // do not change
       CENTRAL_LINECHART,
       CENTRAL_PROTOCOL,
@@ -403,6 +406,8 @@ protected:
     QPointer<QDockWidget> slugsPIDControlWidget;
     QPointer<QDockWidget> slugsHilSimWidget;
     QPointer<QDockWidget> slugsCamControlWidget;
+
+    QPointer<QDockWidget> compassDockWidget;
 
 
     // Popup widgets

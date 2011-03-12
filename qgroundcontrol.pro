@@ -276,7 +276,8 @@ HEADERS += src/MG.h \
     src/ui/QGCSettingsWidget.h \
     src/ui/mission/QGCMissionDoWidget.h \
     src/ui/mission/QGCMissionConditionWidget.h \
-    src/uas/QGCUASParamManager.h
+    src/uas/QGCUASParamManager.h \
+    src/ui/Compas.h
 
 # Google Earth is only supported on Mac OS and Windows with Visual Studio Compiler
 macx|win32-msvc2008: {
@@ -407,7 +408,8 @@ SOURCES += src/main.cc \
     src/ui/QGCSettingsWidget.cc \
     src/ui/mission/QGCMissionDoWidget.cc \
     src/ui/mission/QGCMissionConditionWidget.cc \
-    src/uas/QGCUASParamManager.cc
+    src/uas/QGCUASParamManager.cc \
+    src/ui/Compas.cc
 
 macx|win32-msvc2008: {
     SOURCES += src/ui/map3D/QGCGoogleEarthView.cc

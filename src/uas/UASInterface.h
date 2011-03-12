@@ -406,6 +406,7 @@ signals:
     void statusChanged(UASInterface* uas, QString status);
     void actuatorChanged(UASInterface*, int actId, double value);
     void thrustChanged(UASInterface*, double thrust);
+    void headingChanged(UASInterface*, double heading);
     void heartbeat(UASInterface* uas);
     void attitudeChanged(UASInterface*, double roll, double pitch, double yaw, quint64 usec);
     void attitudeSpeedChanged(int uas, double rollspeed, double pitchspeed, double yawspeed, quint64 usec);
