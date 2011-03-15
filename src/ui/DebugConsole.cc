@@ -284,7 +284,7 @@ void DebugConsole::receiveTextMessage(int id, int component, int severity, QStri
         break;
     }
 
-    m_ui->receiveText->appendHtml(QString("<font color=\"%1\">(%2:%3) %4</font>\n").arg(UASManager::instance()->getUASForId(id)->getColor().name(), name, comp, text));
+    m_ui->receiveText->appendHtml(QString("<font color=\"%1\">(%5:%2:%3) %4</font>\n").arg(UASManager::instance()->getUASForId(id)->getColor().name(), name, comp, text, QTime::currentTime().toString()));
     //m_ui->receiveText->appendPlainText("");
 }
 

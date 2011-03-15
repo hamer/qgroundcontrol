@@ -476,6 +476,7 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 emit valueChanged(uasId, "climbrate", "m/s", hud.climb, time);
                 emit valueChanged(uasId, "throttle", "%", hud.throttle, time);
                 emit thrustChanged(this, hud.throttle/100.0);
+                emit headingChanged(this, hud.heading);
 
                 if (!attitudeKnown)
                 {

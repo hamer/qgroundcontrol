@@ -158,6 +158,8 @@ protected:
     void captureGeometryEndDrag(Geometry* geom, QPointF coordinate);
 
     void createPathButtonClicked(bool checked);
+    void setHomeClicked();
+    void resetHomeClicked();
 
     /** @brief Create the graphic representation of the waypoint */
     void createWaypointGraphAtMap(int id, const QPointF coordinate);
@@ -175,11 +177,14 @@ private:
     Ui::MapWidget *m_ui;
     QList<qmapcontrol::Point*> wps;
     QList<Waypoint2DIcon*>wpIcons;
+    QList<QAction*> provList;
+    int provIdx;
     qmapcontrol::LineString* waypointPath;
     //QHash <QString, qmapcontrol::Point*> wpIndex;
     QPen* pointPen;
     int wpExists(const QPointF coordinate);
     bool waypointIsDrag;
+    bool setHome;
 
 
     qmapcontrol::LineString* camLine;
