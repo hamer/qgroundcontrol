@@ -132,7 +132,7 @@ void UASControlWidget::setUAS(UASInterface* uas)
 
 
     this->uas = uas->getUASID();
-    setBackgroundColor(uas->getColor());
+    //setBackgroundColor(uas->getColor());
 }
 
 UASControlWidget::~UASControlWidget()
