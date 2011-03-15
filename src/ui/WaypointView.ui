@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>2208</width>
-    <height>39</height>
+    <height>40</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,21 +26,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string>QWidget#colorIcon {}
-
-QWidget {
-background-color: #252528;
-color: #DDDDDF;
-border-color: #EEEEEE;
-background-clip: border;
-}
-
-QCheckBox {
-background-color: #252528;
-color: #454545;
-}
-
-QGroupBox {
+   <string notr="true">QGroupBox {
 	border: 1px solid #EEEEEE;
 	border-radius: 5px;
 	padding: 0px 0px 0px 0px;
