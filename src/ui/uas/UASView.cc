@@ -189,8 +189,8 @@ void UASView::setBackgroundColor()
     {
         uasColor = uasColor.darker(675);
     }
-    //colorstyle = colorstyle.sprintf("QGroupBox { border-radius: 12px; padding: 0px; margin: 0px; background-color: #%02X%02X%02X; border: 2px solid %s; }",
-    //                                uasColor.red(), uasColor.green(), uasColor.blue(), borderColor.toStdString().c_str());
+    colorstyle = colorstyle.sprintf("QGroupBox { border-radius: 12px; padding: 0px; margin: 0px; background-color: #%02X%02X%02X; border: 2px solid %s; }",
+                                    uasColor.red(), uasColor.green(), uasColor.blue(), borderColor.toStdString().c_str());
     m_ui->uasViewFrame->setStyleSheet(colorstyle);
 }
 
@@ -435,7 +435,9 @@ void UASView::updateLoad(UASInterface* uas, double load)
 
 void UASView::contextMenuEvent (QContextMenuEvent* event)
 {
-    QMenu menu(this);
+    QWidget temp;
+    QMenu menu(&temp);
+
     menu.addAction(selectAction);
     menu.addSeparator();
     menu.addAction(renameAction);
@@ -453,7 +455,8 @@ void UASView::setBatterySpecs()
     if (uas)
     {
         bool ok;
-        QString newName = QInputDialog::getText(this, tr("Set Battery Specifications for %1").arg(uas->getUASName()),
+        QWidget temp;
+        QString newName = QInputDialog::getText(&temp, tr("Set Battery Specifications for %1").arg(uas->getUASName()),
                                                 tr("Specs: (empty,warn,full), e.g. (9V,9.5V,12.6V) or just warn level in percent (e.g. 15%) to use estimate from MAV"), QLineEdit::Normal,
                                                 uas->getBatterySpecs(), &ok);
 
@@ -466,7 +469,8 @@ void UASView::rename()
     if (uas)
     {
         bool ok;
-        QString newName = QInputDialog::getText(this, tr("Rename System %1").arg(uas->getUASName()),
+        QWidget temp;
+        QString newName = QInputDialog::getText(&temp, tr("Rename System %1").arg(uas->getUASName()),
                                                 tr("System Name:"), QLineEdit::Normal,
                                                 uas->getUASName(), &ok);
 
@@ -492,7 +496,8 @@ void UASView::selectAirframe()
                 << "Pteryx";
 
         bool ok;
-        QString item = QInputDialog::getItem(this, tr("Select Airframe for %1").arg(uas->getUASName()),
+        QWidget temp;
+        QString item = QInputDialog::getItem(&temp, tr("Select Airframe for %1").arg(uas->getUASName()),
                                              tr("Airframe"), airframes, uas->getAirframe(), false, &ok);
         if (ok && !item.isEmpty())
         {
