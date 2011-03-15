@@ -189,8 +189,8 @@ void UASView::setBackgroundColor()
     {
         uasColor = uasColor.darker(675);
     }
-    colorstyle = colorstyle.sprintf("QGroupBox { border-radius: 12px; padding: 0px; margin: 0px; background-color: #%02X%02X%02X; border: 2px solid %s; }",
-                                    uasColor.red(), uasColor.green(), uasColor.blue(), borderColor.toStdString().c_str());
+    //colorstyle = colorstyle.sprintf("QGroupBox { border-radius: 12px; padding: 0px; margin: 0px; background-color: #%02X%02X%02X; border: 2px solid %s; }",
+    //                                uasColor.red(), uasColor.green(), uasColor.blue(), borderColor.toStdString().c_str());
     m_ui->uasViewFrame->setStyleSheet(colorstyle);
 }
 

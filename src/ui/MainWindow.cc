@@ -70,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent):
         changingViewsFlag(false),
         styleFileName(QCoreApplication::applicationDirPath() + "/style-indoor.css"),
         autoReconnect(false),
-        currentStyle(QGC_MAINWINDOW_STYLE_INDOOR)
+        currentStyle(QGC_MAINWINDOW_STYLE_NATIVE)
 {
     loadSettings();
     if (!settings.contains("CURRENT_VIEW"))
@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent):
 
     configureWindowName();
 
-    loadStyle(currentStyle);
+    //loadStyle(currentStyle);
 
 //    // Set the application style (not the same as a style sheet)
 //    // Set the style to Plastique
