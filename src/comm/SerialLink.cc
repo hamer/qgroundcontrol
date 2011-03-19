@@ -324,6 +324,7 @@ bool SerialLink::hardwareConnect()
     port->setParity(this->parity);
     port->setStopBits(this->stopBits);
     port->setDataBits(this->dataBits);
+    port->setFlowControl((FlowType) this->getFlowType());
     port->setTimeout(timeout); // Timeout of 0 ms, we don't want to wait for data, we just poll again next time
 
     connectionStartTime = MG::TIME::getGroundTimeNow();
