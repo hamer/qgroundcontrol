@@ -32,7 +32,6 @@ This file is part of the PIXHAWK project
 #define JOYSTICKWIDGET_H
 
 #include <QtGui/QDialog>
-#include "JoystickInput.h"
 
 namespace Ui {
     class JoystickWidget;
@@ -42,7 +41,7 @@ class JoystickWidget : public QDialog {
     Q_OBJECT
     Q_DISABLE_COPY(JoystickWidget)
 public:
-    explicit JoystickWidget(JoystickInput* joystick, QWidget *parent = 0);
+    explicit JoystickWidget(QWidget *parent = 0);
     virtual ~JoystickWidget();
 
     public slots:
@@ -77,7 +76,6 @@ public:
 protected:
     /** @brief UI change event */
     virtual void changeEvent(QEvent *e);
-    JoystickInput* joystick;  ///< Reference to the joystick
 
 private:
     Ui::JoystickWidget *m_ui;

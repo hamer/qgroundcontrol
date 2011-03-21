@@ -80,10 +80,8 @@ macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.5
 
     #DESTDIR = $$BASEDIR/bin/mac
-    INCLUDEPATH += -framework SDL
 
     LIBS += -framework IOKit \
-        -framework SDL \
         -framework CoreFoundation \
         -framework ApplicationServices \
         -lm
@@ -189,13 +187,7 @@ message("Compiling for linux 32")
 
     LIBS += \
         -L/usr/lib \
-        -lm \
-        -lflite_cmu_us_kal \
-        -lflite_usenglish \
-        -lflite_cmulex \
-        -lflite \
-        -lSDL \
-        -lSDLmain
+        -lm
 
     exists(/usr/include/osg) {
     message("Building support for OpenSceneGraph")
@@ -265,13 +257,7 @@ linux-g++-64 {
 
     LIBS += \
         -L/usr/lib \
-        -lm \
-        -lflite_cmu_us_kal \
-        -lflite_usenglish \
-        -lflite_cmulex \
-        -lflite \
-        -lSDL \
-        -lSDLmain
+        -lm
 
     exists(/usr/include/osg) {
     message("Building support for OpenSceneGraph")
@@ -339,8 +325,7 @@ win32-msvc2008 {
                    $$BASEDIR/lib/msinttypes
                    #"C:\Program Files\Microsoft SDKs\Windows\v7.0\Include"
 
-    LIBS += -L$$BASEDIR/lib/sdl/msvc/lib \
-             -lSDLmain -lSDL
+    LIBS += -L$$BASEDIR/lib/sdl/msvc/lib
 
 exists($$BASEDIR/lib/osg123) {
 message("Building support for OSG")
@@ -374,14 +359,12 @@ exists($$BASEDIR/lib/osgEarth123) {
     TARGETDIR_WIN = $$replace(TARGETDIR,"/","\\")
 
     exists($$TARGETDIR/debug) {
-        QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\lib\\sdl\\win32\\SDL.dll\" \"$$TARGETDIR_WIN\\debug\\SDL.dll\"
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\audio\" \"$$TARGETDIR_WIN\\debug\\audio\\\" /S /E /Y
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\models\" \"$$TARGETDIR_WIN\\debug\\models\\\" /S /E /Y
         QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\images\\earth.html\" \"$$TARGETDIR_WIN\\debug\\earth.html\"
     }
 
     exists($$TARGETDIR/release) {
-        QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\lib\\sdl\\win32\\SDL.dll\" \"$$TARGETDIR_WIN\\release\\SDL.dll\"
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\audio\" \"$$TARGETDIR_WIN\\release\\audio\\\" /S /E /Y
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\models\" \"$$TARGETDIR_WIN\\release\\models\\\" /S /E /Y
         QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\images\\earth.html\" \"$$TARGETDIR_WIN\\release\\earth.html\"
@@ -402,7 +385,7 @@ win32-g++ {
                    #"C:\Program Files\Microsoft SDKs\Windows\v7.0\Include"
 
     LIBS += -L$$BASEDIR/lib/sdl/win32 \
-             -lmingw32 -lSDLmain -lSDL -mwindows
+             -lmingw32 -mwindows
 
     CONFIG += windows
 
@@ -427,13 +410,11 @@ win32-g++ {
     # CP command is available, use it instead of copy / xcopy
     message("Using cp to copy image and audio files to executable")
     debug {
-        QMAKE_POST_LINK += && cp $$BASEDIR/lib/sdl/win32/SDL.dll $$TARGETDIR/debug/SDL.dll
         QMAKE_POST_LINK += && cp -r $$BASEDIR/audio $$TARGETDIR/debug/audio
         QMAKE_POST_LINK += && cp -r $$BASEDIR/models $$TARGETDIR/debug/models
     }
 
     release {
-        QMAKE_POST_LINK += && cp $$BASEDIR/lib/sdl/win32/SDL.dll $$TARGETDIR/release/SDL.dll
         QMAKE_POST_LINK += && cp -r $$BASEDIR/audio $$TARGETDIR/release/audio
         QMAKE_POST_LINK += && cp -r $$BASEDIR/models $$TARGETDIR/release/models
     }
@@ -445,14 +426,12 @@ win32-g++ {
     TARGETDIR_WIN = $$replace(TARGETDIR,"/","\\")
 
     exists($$TARGETDIR/debug) {
-        QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\lib\\sdl\\win32\\SDL.dll\" \"$$TARGETDIR_WIN\\debug\\SDL.dll\"
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\audio\" \"$$TARGETDIR_WIN\\debug\\audio\\\" /S /E /Y
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\models\" \"$$TARGETDIR_WIN\\debug\\models\\\" /S /E /Y
         QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\images\\earth.html\" \"$$TARGETDIR_WIN\\debug\\earth.html\"
     }
 
     exists($$TARGETDIR/release) {
-        QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\lib\\sdl\\win32\\SDL.dll\" \"$$TARGETDIR_WIN\\release\\SDL.dll\"
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\audio\" \"$$TARGETDIR_WIN\\release\\audio\\\" /S /E /Y
         QMAKE_POST_LINK += && xcopy \"$$BASEDIR_WIN\\models\" \"$$TARGETDIR_WIN\\release\\models\\\" /S /E /Y
         QMAKE_POST_LINK += && copy /Y \"$$BASEDIR_WIN\\images\\earth.html\" \"$$TARGETDIR_WIN\\release\\earth.html\"

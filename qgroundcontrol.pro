@@ -211,7 +211,6 @@ HEADERS += src/MG.h \
     src/Waypoint.h \
     src/ui/WaypointView.h \
     src/ui/ObjectDetectionView.h \
-    src/input/JoystickInput.h \
     src/ui/JoystickWidget.h \
     src/ui/DebugConsole.h \
     src/ui/MapWidget.h \
@@ -343,7 +342,6 @@ SOURCES += src/main.cc \
     src/Waypoint.cc \
     src/ui/WaypointView.cc \
     src/ui/ObjectDetectionView.cc \
-    src/input/JoystickInput.cc \
     src/ui/JoystickWidget.cc \
     src/ui/DebugConsole.cc \
     src/ui/MapWidget.cc \

@@ -53,7 +53,6 @@ This file is part of the QGROUNDCONTROL project
 #include "ObjectDetectionView.h"
 #include "HUD.h"
 #include "JoystickWidget.h"
-#include "input/JoystickInput.h"
 #include "DebugConsole.h"
 #include "MapWidget.h"
 #include "ParameterInterface.h"
@@ -412,8 +411,6 @@ protected:
 
     // Popup widgets
     JoystickWidget* joystickWidget;
-
-    JoystickInput* joystick;
 
     /** User interface actions **/
     QAction* connectUASAct;

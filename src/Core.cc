@@ -46,7 +46,6 @@ This file is part of the QGROUNDCONTROL project
 #include "Core.h"
 #include "MG.h"
 #include "MainWindow.h"
-#include "GAudioOutput.h"
 
 #ifdef OPAL_RT
 #include "OpalLink.h"

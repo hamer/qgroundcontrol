@@ -1,20 +1,15 @@
+#include <QTimer>
 #include "JoystickWidget.h"
 #include "ui_JoystickWidget.h"
 #include <QDebug>
 
-JoystickWidget::JoystickWidget(JoystickInput* joystick, QWidget *parent) :
+JoystickWidget::JoystickWidget(QWidget *parent) :
         QDialog(parent),
         m_ui(new Ui::JoystickWidget)
 {
     m_ui->setupUi(this);
-    this->joystick = joystick;
-
-    connect(this->joystick, SIGNAL(joystickChanged(double,double,double,double,int,int)), this, SLOT(updateJoystick(double,double,double,double,int,int)));
-    connect(this->joystick, SIGNAL(buttonPressed(int)), this, SLOT(pressKey(int)));
-
     // Display the widget
     this->window()->setWindowTitle(tr("Joystick Settings"));
-    if (joystick) updateStatus(tr("Found joystick: %1").arg(joystick->getName()));
 
     this->show();
 }

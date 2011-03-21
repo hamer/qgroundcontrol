@@ -153,12 +153,6 @@ MainWindow::MainWindow(QWidget *parent):
 
     connect(LinkManager::instance(), SIGNAL(newLink(LinkInterface*)), this, SLOT(addLink(LinkInterface*)));
 
-    // Connect user interface devices
-    if (!joystick)
-    {
-        joystick = new JoystickInput();
-    }
-
     // Enable and update view
     presentView();
 
@@ -179,7 +173,6 @@ MainWindow::~MainWindow()
     storeSettings();
 
     delete mavlink;
-    delete joystick;
 
     // Get and delete all dockwidgets and contained
     // widgets
@@ -1508,11 +1501,7 @@ void MainWindow::configure()
 {
     if (!joystickWidget)
     {
-        if (!joystick->isRunning())
-        {
-            joystick->start();
-        }
-        joystickWidget = new JoystickWidget(joystick);
+        joystickWidget = new JoystickWidget();
     }
     joystickWidget->show();
 }
