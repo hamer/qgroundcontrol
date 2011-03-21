@@ -7,7 +7,6 @@
 #include "LinkManager.h"
 #include "MAVLinkProtocol.h"
 #include "MAVLinkSettingsWidget.h"
-#include "GAudioOutput.h"
 
 //, Qt::WindowFlags flags
 

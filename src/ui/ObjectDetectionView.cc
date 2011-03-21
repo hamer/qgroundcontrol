@@ -35,7 +35,6 @@ This file is part of the PIXHAWK project
 #include "ObjectDetectionView.h"
 #include "ui_ObjectDetectionView.h"
 #include "UASManager.h"
-#include "GAudioOutput.h"
 
 #include <QDebug>
 #include <QMap>
