@@ -94,9 +94,6 @@ void ObjectDetectionView::newPattern(int uasId, QString patternPath, float confi
     {
         if (!patternList.contains(patternPath))
         {
-            // Emit audio message on detection
-            if (detected) GAudioOutput::instance()->say("System " + QString::number(uasId) + " detected pattern " + QString(patternPath.split("/", QString::SkipEmptyParts).last()).split(".", QString::SkipEmptyParts).first());
-
             patternList.insert(patternPath, Pattern(patternPath, confidence));
         }
         else
@@ -141,9 +138,6 @@ void ObjectDetectionView::newLetter(int uasId, QString letter, float confidence,
     {
         if (!letterList.contains(letter))
         {
-            // Emit audio message on detection
-            if (detected) GAudioOutput::instance()->say("System " + QString::number(uasId) + " detected letter " + letter);
-
             letterList.insert(letter, Pattern(letter, 0));
         }
         else

@@ -32,7 +32,6 @@ QT += network \
     opengl \
     svg \
     xml \
-    phonon \
     webkit
 TEMPLATE = app
 TARGET = qgroundcontrol
@@ -223,7 +222,6 @@ HEADERS += src/MG.h \
     src/ui/HDDisplay.h \
     src/ui/MAVLinkSettingsWidget.h \
     src/ui/AudioOutputWidget.h \
-    src/GAudioOutput.h \
     src/LogCompressor.h \
     src/ui/QGCParamWidget.h \
     src/ui/QGCSensorSettingsWidget.h \
@@ -356,7 +354,6 @@ SOURCES += src/main.cc \
     src/ui/HDDisplay.cc \
     src/ui/MAVLinkSettingsWidget.cc \
     src/ui/AudioOutputWidget.cc \
-    src/GAudioOutput.cc \
     src/LogCompressor.cc \
     src/ui/QGCParamWidget.cc \
     src/ui/QGCSensorSettingsWidget.cc \

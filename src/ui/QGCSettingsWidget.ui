@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>535</width>
-    <height>427</height>
+    <width>446</width>
+    <height>310</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,17 +25,6 @@
       </attribute>
       <layout class="QGridLayout" name="generalPaneGridLayout">
        <item row="0" column="0">
-        <widget class="QCheckBox" name="audioMuteCheckBox">
-         <property name="text">
-          <string>Mute all audio output</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../../mavground.qrc">
-           <normaloff>:/images/status/audio-volume-muted.svg</normaloff>:/images/status/audio-volume-muted.svg</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
         <widget class="QCheckBox" name="reconnectCheckBox">
          <property name="text">
           <string>Automatically reconnect last link on application startup</string>
@@ -46,7 +35,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="0">
         <widget class="QRadioButton" name="nativeStyle">
          <property name="text">
           <string>Use native platform look and feel (Windows/Linux/Mac OS)</string>
@@ -56,14 +45,14 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="2" column="0">
         <widget class="QRadioButton" name="indoorStyle">
          <property name="text">
           <string>Use indoor mission style (black background)</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="3" column="0">
         <widget class="QRadioButton" name="outdoorStyle">
          <property name="text">
           <string>Use outdoor mission style (light background)</string>

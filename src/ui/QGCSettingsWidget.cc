@@ -31,11 +31,6 @@ QGCSettingsWidget::QGCSettingsWidget(QWidget *parent, Qt::WindowFlags flags) :
 
     this->window()->setWindowTitle(tr("QGroundControl Settings"));
 
-    // Audio preferences
-    ui->audioMuteCheckBox->setChecked(GAudioOutput::instance()->isMuted());
-    connect(ui->audioMuteCheckBox, SIGNAL(toggled(bool)), GAudioOutput::instance(), SLOT(mute(bool)));
-    connect(GAudioOutput::instance(), SIGNAL(mutedChanged(bool)), ui->audioMuteCheckBox, SLOT(setChecked(bool)));
-
     // Reconnect
     ui->reconnectCheckBox->setChecked(MainWindow::instance()->autoReconnectEnabled());
     connect(ui->reconnectCheckBox, SIGNAL(clicked(bool)), MainWindow::instance(), SLOT(enableAutoReconnect(bool)));

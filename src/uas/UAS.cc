@@ -138,13 +138,6 @@ void UAS::updateState()
     {
         positionLock = false;
     }
-    else
-    {
-        if (mode > (uint8_t)MAV_MODE_LOCKED && positionLock)
-        {
-            GAudioOutput::instance()->notifyNegative();
-        }
-    }
 }
 
 void UAS::setSelected()
@@ -340,27 +333,6 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 emit dropRateChanged(this->getUASID(), state.packet_drop/1000.0f);
                 //qDebug() << __FILE__ << __LINE__ << "RCV LOSS: " << state.packet_drop;
 
-                // AUDIO
-                if (modechanged && statechanged)
-                {
-                    // Output both messages
-                    audiostring += modeAudio + " and " + stateAudio;
-                }
-                else
-                {
-                    // Output the one message
-                    audiostring += modeAudio + stateAudio;
-                }
-                if ((int)state.status == (int)MAV_STATE_CRITICAL || state.status == (int)MAV_STATE_EMERGENCY)
-                {
-                    GAudioOutput::instance()->startEmergency();
-                }
-                else if (modechanged || statechanged)
-                {
-                    GAudioOutput::instance()->stopEmergency();
-                    GAudioOutput::instance()->say(audiostring);
-                }
-
                 if (state.status == MAV_STATE_POWEROFF)
                 {
                     emit systemRemoved(this);
@@ -530,11 +502,6 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
 
                 //emit attitudeChanged(this, pos.roll, pos.pitch, pos.yaw, time);
                 // Set internal state
-                if (!positionLock)
-                {
-                    // If position was not locked before, notify positive
-                    GAudioOutput::instance()->notifyPositive();
-                }
                 positionLock = true;
             }
             break;
@@ -559,11 +526,6 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 emit globalPositionChanged(this, latitude, longitude, altitude, time);
                 emit speedChanged(this, speedX, speedY, speedZ, time);
                 // Set internal state
-                if (!positionLock)
-                {
-                    // If position was not locked before, notify positive
-                    GAudioOutput::instance()->notifyPositive();
-                }
                 positionLock = true;
                 //TODO fix this hack for forwarding of global position for patch antenna tracking
                 forwardMessage(message);
@@ -588,11 +550,6 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 emit globalPositionChanged(this, latitude, longitude, altitude, time);
                 emit speedChanged(this, speedX, speedY, speedZ, time);
                 // Set internal state
-                if (!positionLock)
-                {
-                    // If position was not locked before, notify positive
-                    GAudioOutput::instance()->notifyPositive();
-                }
                 positionLock = true;
                 //TODO fix this hack for forwarding of global position for patch antenna tracking
                 forwardMessage(message);
@@ -858,7 +815,6 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 mavlink_msg_waypoint_reached_decode(&message, &wpr);
                 waypointManager.handleWaypointReached(message.sysid, message.compid, &wpr);
                 QString text = QString("System %1 reached waypoint %2").arg(getUASName()).arg(wpr.seq);
-                GAudioOutput::instance()->say(text);
                 emit textMessageReceived(message.sysid, message.compid, 0, text);
             }
             break;
@@ -1033,7 +989,6 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 {
                     unknownPackets.append(message.msgid);
                     QString errString = tr("UNABLE TO DECODE MESSAGE NUMBER %1").arg(message.msgid);
-                    GAudioOutput::instance()->say(errString+tr(", please check the communication console for details."));
                     emit textMessageReceived(uasId, message.compid, 255, errString);
                     std::cout << "Unable to decode message from system " << std::dec << static_cast<int>(message.sysid) << " with message id:" << static_cast<int>(message.msgid) << std::endl;
                     //qDebug() << std::cerr << "Unable to decode message from system " << std::dec << static_cast<int>(message.acid) << " with message id:" << static_cast<int>(message.msgid) << std::endl;
@@ -2248,8 +2203,6 @@ void UAS::startLowBattAlarm()
 {
     if (!lowBattAlarm)
     {
-        GAudioOutput::instance()->alert(tr("SYSTEM %1 HAS LOW BATTERY").arg(getUASName()));
-        QTimer::singleShot(2000, GAudioOutput::instance(), SLOT(startEmergency()));
         lowBattAlarm = true;
     }
 }
@@ -2258,7 +2211,6 @@ void UAS::stopLowBattAlarm()
 {
     if (lowBattAlarm)
     {
-        GAudioOutput::instance()->stopEmergency();
         lowBattAlarm = false;
     }
 }

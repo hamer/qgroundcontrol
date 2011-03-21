@@ -25,7 +25,6 @@
 #include "QGCWaypointListMulti.h"
 #include "MainWindow.h"
 #include "JoystickWidget.h"
-#include "GAudioOutput.h"
 #include "QGCToolWidget.h"
 #include "QGCMAVLinkLogPlayer.h"
 #include "QGCSettingsWidget.h"
@@ -1437,11 +1436,6 @@ void MainWindow::connectCommonActions()
 
     // Custom widget actions
     connect(ui.actionNewCustomWidget, SIGNAL(triggered()), this, SLOT(createCustomWidget()));
-
-    // Audio output
-    ui.actionMuteAudioOutput->setChecked(GAudioOutput::instance()->isMuted());
-    connect(GAudioOutput::instance(), SIGNAL(mutedChanged(bool)), ui.actionMuteAudioOutput, SLOT(setChecked(bool)));
-    connect(ui.actionMuteAudioOutput, SIGNAL(triggered(bool)), GAudioOutput::instance(), SLOT(mute(bool)));
 
     // User interaction
     // NOTE: Joystick thread is not started and
