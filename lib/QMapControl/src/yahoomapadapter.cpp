@@ -42,8 +42,13 @@ namespace qmapcontrol
     {
     }
 
-    bool YahooMapAdapter::isValid(int /*x*/, int /*y*/, int /*z*/) const
+    bool YahooMapAdapter::isValid(int x, int y, int z) const
     {
+        if (x<0 || x>pow(2.0,z+1)-1 ||
+            y<0 || y>pow(2.0,z+1)-1)
+        {
+            return false;
+        }
         return true;
     }
 

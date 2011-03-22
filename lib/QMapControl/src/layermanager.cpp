@@ -356,9 +356,9 @@ namespace qmapcontrol
 
     void LayerManager::setZoom(int zoomlevel)
     {
-        int current_zoom = layer()->mapadapter()->currentZoom();
+        int current_zoom = layer()->mapadapter()->adaptedZoom();
 
-        if (zoomlevel < current_zoom)
+        if (zoomlevel < current_zoom )
         {
             for (int i=current_zoom; i>zoomlevel; i--)
             {
@@ -467,7 +467,7 @@ namespace qmapcontrol
 
     int LayerManager::currentZoom() const
     {
-        return layer()->mapadapter()->currentZoom();
+        return layer()->mapadapter()->adaptedZoom();
     }
 
     void LayerManager::resize(QSize newSize)

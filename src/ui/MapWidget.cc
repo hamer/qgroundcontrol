@@ -297,6 +297,7 @@ void MapWidget::init()
                 this, SLOT(captureGeometryEndDrag(Geometry*, QPointF)));
 
         mapproviderSelected(provList[lastProvider]);
+        update();
 
         qDebug() << "CHECK END";
     }
