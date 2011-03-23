@@ -194,15 +194,6 @@ void MapWidget::init()
         goToButton->setToolTip(tr("Enter a latitude/longitude position to move the map to"));
         goToButton->setStatusTip(tr("Enter a latitude/longitude position to move the map to"));
 
-        QPushButton *setHomeButton = new QPushButton(QIcon(":/images/actions/go-home.svg"), "", this);
-        setHomeButton->setStyleSheet(buttonStyle);
-        setHomeButton->setToolTip(tr("Select MAVs home position manually"));
-        setHomeButton->setStatusTip(tr("Select MAVs home position manually"));
-        QPushButton *resetHomeButton = new QPushButton(QIcon(":/images/categories/applications-internet.svg"), "", this);
-        resetHomeButton->setStyleSheet(buttonStyle);
-        resetHomeButton->setToolTip(tr("Let MAV use GPS-navigation for determinig home position"));
-        resetHomeButton->setStatusTip(tr("Let MAV use GPS-navigation for determinig home position"));
-
         zoomin->setMaximumWidth(30);
         zoomout->setMaximumWidth(30);
         createPath->setMaximumWidth(30);
@@ -224,8 +215,6 @@ void MapWidget::init()
         innerlayout->addWidget(zoomout, 1, 0);
         innerlayout->addWidget(followgps, 2, 0);
         innerlayout->addWidget(createPath, 3, 0);
-        innerlayout->addWidget(setHomeButton, 6, 7);
-        innerlayout->addWidget(resetHomeButton, 7, 7);
         //innerlayout->addWidget(clearTracking, 4, 0);
         // Add spacers to compress buttons on the top left
         innerlayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 5, 0);
@@ -283,9 +272,6 @@ void MapWidget::init()
 
         connect(createPath, SIGNAL(clicked(bool)),
                 this, SLOT(createPathButtonClicked(bool)));
-
-        connect(setHomeButton, SIGNAL(clicked()), this, SLOT(setHomeClicked()));
-        connect(resetHomeButton, SIGNAL(clicked()), this, SLOT(resetHomeClicked()));
 
         connect(geomLayer, SIGNAL(geometryClicked(Geometry*,QPoint)),
                 this, SLOT(captureGeometryClick(Geometry*, QPoint)));
@@ -449,25 +435,6 @@ void MapWidget::createPathButtonClicked(bool checked)
             this->setCursor(Qt::ArrowCursor);
             mc->setMouseMode(qmapcontrol::MapControl::Panning);
         }
-    }
-}
-
-void MapWidget::setHomeClicked()
-{
-    if (mc && mav)
-    {
-        // change the cursor shape
-        this->setCursor(Qt::PointingHandCursor);
-        mc->setMouseMode(qmapcontrol::MapControl::None);
-        setHome = true;
-    }
-}
-
-void MapWidget::resetHomeClicked()
-{
-    if (mc && mav)
-    {
-        mav->setLocalOriginAtCurrentGPSPosition();
     }
 }
 
