@@ -43,6 +43,10 @@ namespace qmapcontrol
 
     void MapNetwork::loadImage(const QString& host, const QString& url)
     {
+        // prevent agressive loading unexistent tiles
+        if (urlBlacklist.contains(url))
+            return;
+
         // qDebug() << "getting: " << QString(host).append(url);
         // http->setHost(host);
         // int getId = http->get(url);
@@ -66,7 +70,7 @@ namespace qmapcontrol
         //qDebug() << "QMapControl: MapNetwork::requestFinished" << http->state() << ", id: " << id;
         if (error)
         {
-            qDebug() << "QMapControl: network error: " << http->errorString();
+            //qDebug() << "QMapControl: network error: " << http->errorString();
             //restart query
 
         }
@@ -79,7 +83,7 @@ namespace qmapcontrol
                 QString url = loadingMap[id];
                 loadingMap.remove(id);
                 vectorMutex.unlock();
-                //qDebug() << "QMapControl: request finished for id: " << id << ", belongs to: " << notifier.url << endl;
+                //qDebug() << "QMapControl: request finished for id: " << id << ", belongs to: " << url;
                 QByteArray ax;
 
                 if (http->bytesAvailable()>0)
@@ -99,6 +103,7 @@ namespace qmapcontrol
                     {
                         // Silently ignore map request for a
                         // 0xn pixel map
+                        urlBlacklist.append(url);
                         //qDebug() << "QMapControl: IGNORED 0x0 pixel map request, widthxheight:" << pm.width() << "x" << pm.height();
                         //qDebug() << "QMapControl: HTML ERROR MESSAGE:" << ax << "at " << __FILE__ << __LINE__;
                     }

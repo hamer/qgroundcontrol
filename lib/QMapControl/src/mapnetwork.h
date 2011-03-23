@@ -31,6 +31,7 @@
 #include <QHttp>
 #include <QVector>
 #include <QPixmap>
+#include <QStringList>
 #include "imagemanager.h"
 /**
         @author Kai Winter <kaiwinter@gmx.de>
@@ -70,6 +71,7 @@ namespace qmapcontrol
         QMutex vectorMutex;
         MapNetwork& operator=(const MapNetwork& rhs);
         MapNetwork(const MapNetwork& old);
+        QStringList urlBlacklist;
 
     private slots:
         void requestFinished(int id, bool error);
