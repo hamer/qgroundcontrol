@@ -3,8 +3,6 @@
 #ifdef Q_OS_MAC
 	#include <ApplicationServices/ApplicationServices.h>
 #else
-	#include <flite.h>
-	#include <phonon/mediaobject.h>
 	#include <QTemporaryFile>
 #endif
 

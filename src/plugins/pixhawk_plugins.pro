@@ -5,7 +5,6 @@ include(../../qgroundcontrol.pri)
 
 TEMPLATE      = lib
 CONFIG       += plugin
-QT += phonon
 INCLUDEPATH  += ../. \
     ../../../mavlink/include \
     ../../MAVLink/include \
@@ -15,7 +14,6 @@ INCLUDEPATH  += ../. \
 HEADERS       = PxMAV.h
 SOURCES       = PxMAV.cc \
     ../uas/UAS.cc \
-    ../GAudioOutput.cc \
     ../comm/MAVLinkProtocol.cc \
     ../uas/UASManager.cc
 TARGET        = $$qtLibraryTarget(pixhawk_plugins)

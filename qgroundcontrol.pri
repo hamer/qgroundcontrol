@@ -50,7 +50,7 @@ macx {
    # COMPILER_VERSION = $$system(gcc -v)
     #message(Using compiler $$COMPILER_VERSION)
 
-        CONFIG += x86 cocoa phonon
+        CONFIG += x86 cocoa 
         CONFIG -= x86_64
 
     #HARDWARE_PLATFORM = $$system(uname -a)
@@ -177,8 +177,7 @@ linux-g++ {
 message("Compiling for linux 32")
 
     INCLUDEPATH += /usr/include \
-                   /usr/local/include \
-                   /usr/include/qt4/phonon
+                   /usr/local/include
               # $$BASEDIR/lib/flite/include \
               # $$BASEDIR/lib/flite/lang
 
@@ -246,8 +245,7 @@ linux-g++-64 {
 
     QMAKE_POST_LINK += cp -rf $$BASEDIR/audio $$DESTDIR/.
 
-    INCLUDEPATH += /usr/include \
-                   /usr/include/qt4/phonon
+    INCLUDEPATH += /usr/include
               # $$BASEDIR/lib/flite/include \
               # $$BASEDIR/lib/flite/lang
 
