@@ -16,10 +16,13 @@ signals:
 public slots:
     virtual void setActiveUAS(UASInterface* uas);
     virtual void updateHeading(UASInterface* uas, double heading);
+    virtual void updateSpeed(UASInterface*, double x, double y, double z, quint64 usec);
 
 protected:
     UASInterface* uas;
-    double heading;
+    double heading, totalSpeed;
+
+    void paintEvent(QPaintEvent *);
 };
 
 #endif // COMPAS_H

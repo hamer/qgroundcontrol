@@ -581,10 +581,10 @@ void MainWindow::buildPxWidgets()
     {
         Compas *compass = new Compas(this);
         connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), compass, SLOT(setActiveUAS(UASInterface*)));
-        compassDockWidget = new QDockWidget(tr("Compass"), this);
+        compassDockWidget = new QDockWidget(tr("Direction"), this);
         compassDockWidget->setWidget(compass);
         compassDockWidget->setObjectName("COMPASS");
-        addToToolsMenu(compassDockWidget, tr("Compass"), SLOT(showToolWidget(bool)), MENU_COMPASS, Qt::RightDockWidgetArea);
+        addToToolsMenu(compassDockWidget, tr("Direction"), SLOT(showToolWidget(bool)), MENU_COMPASS, Qt::RightDockWidgetArea);
     }
 }
 
