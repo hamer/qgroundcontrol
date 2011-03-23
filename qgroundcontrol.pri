@@ -320,12 +320,10 @@ win32-msvc2008 {
 		CONFIG += console
 	}
 
-    INCLUDEPATH += $$BASEDIR/lib/sdl/msvc/include \
+    INCLUDEPATH +=  \
                    $$BASEDIR/lib/opal/include \
                    $$BASEDIR/lib/msinttypes
                    #"C:\Program Files\Microsoft SDKs\Windows\v7.0\Include"
-
-    LIBS += -L$$BASEDIR/lib/sdl/msvc/lib
 
 exists($$BASEDIR/lib/osg123) {
 message("Building support for OSG")
@@ -380,11 +378,11 @@ win32-g++ {
     # Special settings for debug
     #CONFIG += CONSOLE
 
-    INCLUDEPATH += $$BASEDIR/lib/sdl/include \
+    INCLUDEPATH += \
                    $$BASEDIR/lib/opal/include #\ #\
                    #"C:\Program Files\Microsoft SDKs\Windows\v7.0\Include"
 
-    LIBS += -L$$BASEDIR/lib/sdl/win32 \
+    LIBS += \
              -lmingw32 -mwindows
 
     CONFIG += windows
