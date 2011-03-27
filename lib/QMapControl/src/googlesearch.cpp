@@ -114,35 +114,35 @@ namespace qmapcontrol
         }
 
         QDomNodeList kml = doc.elementsByTagName("kml");
-        if (kml.length() < 0) // if no responce received
+        if (kml.length() < 1) // if no responce received
         {
             emit searchFinished(0.0, 0.0, true);
             return;
         }
 
         QDomNodeList responce = kml.item(0).toElement().elementsByTagName("Response");
-        if (responce.length() < 0) // if no responce received
+        if (responce.length() < 1) // if no responce received
         {
             emit searchFinished(0.0, 0.0, true);
             return;
         }
 
         QDomNodeList placemark = responce.item(0).toElement().elementsByTagName("Placemark");
-        if (placemark.length() < 0) // if no responce received
+        if (placemark.length() < 1) // if no responce received
         {
             emit searchFinished(0.0, 0.0, true);
             return;
         }
 
         QDomNodeList point = placemark.item(0).toElement().elementsByTagName("Point");
-        if (point.length() < 0) // if no responce received
+        if (point.length() < 1) // if no responce received
         {
             emit searchFinished(0.0, 0.0, true);
             return;
         }
 
         QDomNodeList coord = point.item(0).toElement().elementsByTagName("coordinates");
-        if (coord.length() < 0) // if no responce received
+        if (coord.length() < 1) // if no responce received
         {
             emit searchFinished(0.0, 0.0, true);
             return;
