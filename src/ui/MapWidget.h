@@ -165,6 +165,8 @@ protected:
 
     void sendWaypoints();
     void readWaypoints();
+    void searchPlace();
+    void searchFinished(double longitude, double latitude, bool error);
 
   signals:
     //void movePoint(QPointF newCoord);
@@ -193,6 +195,7 @@ private:
     QPointF lastCamBorderPos;
     bool drawCamBorder;
     int radioCamera;
+    GoogleSearch *searchGoogle;
 
 };
 

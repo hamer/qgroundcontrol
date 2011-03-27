@@ -25,6 +25,7 @@ HEADERS += curve.h \
     googlesatmapadapter.h \
     openaerialmapadapter.h \
     fixedimageoverlay.h \
+    googlesearch.h \
     emptymapadapter.h
 SOURCES += curve.cpp \
     geometry.cpp \
@@ -49,4 +50,5 @@ SOURCES += curve.cpp \
     googlesatmapadapter.cpp \
     openaerialmapadapter.cpp \
     fixedimageoverlay.cpp \
+    googlesearch.cpp \
     emptymapadapter.cpp

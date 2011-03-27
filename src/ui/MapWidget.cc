@@ -13,6 +13,8 @@
 #include <QComboBox>
 #include <QGridLayout>
 #include <QDir>
+#include <QInputDialog>
+#include <QMessageBox>
 
 #include "QGC.h"
 #include "MapWidget.h"
@@ -56,6 +58,8 @@ void MapWidget::init()
         //   VISUAL MAP STYLE
         QString buttonStyle("QAbstractButton { background-color: rgba(20, 20, 20, 45%); border-color: rgba(10, 10, 10, 50%); color: rgb(192,192,192)} QAbstractButton:checked { border: 2px solid #379AC3; }");
         mc->setPen(QGC::colorCyan.darker(400));
+
+        searchGoogle = new GoogleSearch(this);
 
         waypointIsDrag = false;
 
@@ -204,12 +208,18 @@ void MapWidget::init()
         receiveWaypointsButton->setToolTip(tr("Read wapoints from MAV"));
         receiveWaypointsButton->setStatusTip(tr("Read wapoints from MAV"));
 
+        QPushButton *searchButton = new QPushButton("S", this);
+        searchButton->setStyleSheet(buttonStyle);
+        searchButton->setToolTip(tr("Search place"));
+        searchButton->setStatusTip(tr("Search place"));
+
         zoomin->setMaximumWidth(30);
         zoomout->setMaximumWidth(30);
         createPath->setMaximumWidth(30);
         //    clearTracking->setMaximumWidth(30);
         followgps->setMaximumWidth(30);
         goToButton->setMaximumWidth(30);
+        searchButton->setMaximumWidth(30);
 
         // Set checkable buttons
         // TODO: Currently checked buttons are are very difficult to distinguish when checked.
@@ -229,6 +239,7 @@ void MapWidget::init()
         innerlayout->addWidget(receiveWaypointsButton, 1, 1);
         innerlayout->addWidget(mapButton, 0, 6);
         innerlayout->addWidget(goToButton, 0, 7);
+        innerlayout->addWidget(searchButton, 1, 7);
         innerlayout->setRowStretch(7, 1);
         innerlayout->setColumnStretch(5, 1);
         mc->setLayout(innerlayout);
@@ -292,6 +303,9 @@ void MapWidget::init()
 
         connect(sendWaypointsButton, SIGNAL(clicked()), this, SLOT(sendWaypoints()));
         connect(receiveWaypointsButton, SIGNAL(clicked()), this, SLOT(readWaypoints()));
+
+        connect(searchGoogle, SIGNAL(searchFinished(double,double,bool)), this, SLOT(searchFinished(double,double,bool)));
+        connect(searchButton, SIGNAL(clicked()), this, SLOT(searchPlace()));
 
         mapproviderSelected(provList[lastProvider]);
         update();
@@ -1249,5 +1263,37 @@ void MapWidget::readWaypoints()
     if (mav)
     {
         mav->getWaypointManager()->readWaypoints();
+    }
+}
+
+void MapWidget::searchPlace()
+{
+    bool ok = false;
+    QString city = QInputDialog::getText(this, tr("Search place"),
+                                            tr("Search for:"), QLineEdit::Normal,
+                                            "", &ok);
+
+    if (ok && !city.isEmpty())
+    {
+        searchGoogle->searchPlace(city);
+    }
+}
+
+void MapWidget::searchFinished(double longitude, double latitude, bool error)
+{
+    if (error)
+    {
+        QMessageBox::warning(this, tr("Search place"), tr("Place not found"));
+    }
+    else
+    {
+        qDebug() << "SearchGoogle: " << longitude << ", " << latitude;
+        int ret;
+        ret = QMessageBox::question(this, tr("Search place"),
+                                       tr("Do you want to move to (%1, %2) coordinates?")
+                                       .arg(longitude).arg(latitude),
+                                       QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        if (ret == QMessageBox::Yes)
+            mc->setView(QPointF(longitude, latitude));
     }
 }

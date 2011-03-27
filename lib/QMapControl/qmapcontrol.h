@@ -16,3 +16,4 @@
 #include "src/openaerialmapadapter.h"
 #include "src/fixedimageoverlay.h"
 #include "src/emptymapadapter.h"
+#include "src/googlesearch.h"
