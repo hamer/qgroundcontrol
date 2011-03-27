@@ -69,9 +69,13 @@ namespace qmapcontrol
     {
         if (error)
         {
-            if (loading.contains(id))
-                loading.remove(id);
-            vectorMutex.unlock();
+            if (vectorMutex.tryLock())
+            {
+                if (loading.contains(id))
+                    loading.remove(id);
+
+                vectorMutex.unlock();
+            }
 
             emit searchFinished(0.0, 0.0, true);
         }
