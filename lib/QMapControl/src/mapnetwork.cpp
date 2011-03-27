@@ -72,6 +72,13 @@ namespace qmapcontrol
         {
             //qDebug() << "QMapControl: network error: " << http->errorString();
             //restart query
+            if (vectorMutex.tryLock())
+            {
+                if (loadingMap.contains(id))
+                    loadingMap.remove(id);
+
+                vectorMutex.unlock();
+            }
 
         }
         else if (vectorMutex.tryLock())

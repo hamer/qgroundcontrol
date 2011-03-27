@@ -68,7 +68,13 @@ namespace qmapcontrol
     void GoogleSearch::requestFinished(int id, bool error)
     {
         if (error)
+        {
+            if (loading.contains(id))
+                loading.remove(id);
+            vectorMutex.unlock();
+
             emit searchFinished(0.0, 0.0, true);
+        }
         else if (vectorMutex.tryLock())
         {
             if (loading.contains(id))
