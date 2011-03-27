@@ -26,6 +26,7 @@
 #include "googlesearch.h"
 #include <QWaitCondition>
 #include <QUrl>
+#include <QDomDocument>
 namespace qmapcontrol
 {
     GoogleSearch::GoogleSearch(QObject* parent)
@@ -103,9 +104,62 @@ namespace qmapcontrol
 
     void GoogleSearch::parseXML(const QByteArray &data)
     {
-        double lon = 0.0, lat = 0.0;
-
         //qDebug() << QString(data);
-        emit searchFinished(lon, lat, false);
+        QDomDocument doc;
+
+        if (!doc.setContent(data)) // if parse fails
+        {
+            emit searchFinished(0.0, 0.0, true);
+            return;
+        }
+
+        QDomNodeList kml = doc.elementsByTagName("kml");
+        if (kml.length() < 0) // if no responce received
+        {
+            emit searchFinished(0.0, 0.0, true);
+            return;
+        }
+
+        QDomNodeList responce = kml.item(0).toElement().elementsByTagName("Response");
+        if (responce.length() < 0) // if no responce received
+        {
+            emit searchFinished(0.0, 0.0, true);
+            return;
+        }
+
+        QDomNodeList placemark = responce.item(0).toElement().elementsByTagName("Placemark");
+        if (placemark.length() < 0) // if no responce received
+        {
+            emit searchFinished(0.0, 0.0, true);
+            return;
+        }
+
+        QDomNodeList point = placemark.item(0).toElement().elementsByTagName("Point");
+        if (point.length() < 0) // if no responce received
+        {
+            emit searchFinished(0.0, 0.0, true);
+            return;
+        }
+
+        QDomNodeList coord = point.item(0).toElement().elementsByTagName("coordinates");
+        if (coord.length() < 0) // if no responce received
+        {
+            emit searchFinished(0.0, 0.0, true);
+            return;
+        }
+
+        QString text = coord.item(0).toElement().text();
+
+        bool ok = true, convert;
+        QStringList split = text.split(",");
+        double lon = split[0].toDouble(&convert);
+        ok &= convert;
+        double lat = split[1].toDouble(&convert);
+        ok &= convert;
+
+        if (ok)
+        {
+            emit searchFinished(lon, lat, false);
+        }
     }
 }
