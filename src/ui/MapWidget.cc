@@ -194,6 +194,16 @@ void MapWidget::init()
         goToButton->setToolTip(tr("Enter a latitude/longitude position to move the map to"));
         goToButton->setStatusTip(tr("Enter a latitude/longitude position to move the map to"));
 
+        QPushButton *sendWaypointsButton = new QPushButton(QIcon(":/images/devices/network-wireless.svg"), "", this);
+        sendWaypointsButton->setStyleSheet(buttonStyle);
+        sendWaypointsButton->setToolTip(tr("Send wapoints to MAV"));
+        sendWaypointsButton->setStatusTip(tr("Send wapoints to MAV"));        
+
+        QPushButton *receiveWaypointsButton = new QPushButton(QIcon(":/images/status/software-update-available.svg"), "", this);
+        receiveWaypointsButton->setStyleSheet(buttonStyle);
+        receiveWaypointsButton->setToolTip(tr("Read wapoints from MAV"));
+        receiveWaypointsButton->setStatusTip(tr("Read wapoints from MAV"));
+
         zoomin->setMaximumWidth(30);
         zoomout->setMaximumWidth(30);
         createPath->setMaximumWidth(30);
@@ -215,14 +225,12 @@ void MapWidget::init()
         innerlayout->addWidget(zoomout, 1, 0);
         innerlayout->addWidget(followgps, 2, 0);
         innerlayout->addWidget(createPath, 3, 0);
-        //innerlayout->addWidget(clearTracking, 4, 0);
-        // Add spacers to compress buttons on the top left
-        innerlayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 5, 0);
-        innerlayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 0, 1, 0, 7);
+        innerlayout->addWidget(sendWaypointsButton, 0, 1);
+        innerlayout->addWidget(receiveWaypointsButton, 1, 1);
         innerlayout->addWidget(mapButton, 0, 6);
         innerlayout->addWidget(goToButton, 0, 7);
-        innerlayout->setRowStretch(0, 1);
-        innerlayout->setRowStretch(1, 100);
+        innerlayout->setRowStretch(7, 1);
+        innerlayout->setColumnStretch(5, 1);
         mc->setLayout(innerlayout);
 
         // Configure the WP Path's pen
@@ -281,6 +289,9 @@ void MapWidget::init()
 
         connect(geomLayer, SIGNAL(geometryEndDrag(Geometry*, QPointF)),
                 this, SLOT(captureGeometryEndDrag(Geometry*, QPointF)));
+
+        connect(sendWaypointsButton, SIGNAL(clicked()), this, SLOT(sendWaypoints()));
+        connect(receiveWaypointsButton, SIGNAL(clicked()), this, SLOT(readWaypoints()));
 
         mapproviderSelected(provList[lastProvider]);
         update();
@@ -1225,3 +1236,18 @@ QPointF MapWidget::getPointxBearing_Range(double lat1, double lon1, double beari
     return temp;
 }
 
+void MapWidget::sendWaypoints()
+{
+    if (mav)
+    {
+        mav->getWaypointManager()->writeWaypoints();
+    }
+}
+
+void MapWidget::readWaypoints()
+{
+    if (mav)
+    {
+        mav->getWaypointManager()->readWaypoints();
+    }
+}

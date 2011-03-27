@@ -163,6 +163,9 @@ protected:
     void createWaypointGraphAtMap(int id, const QPointF coordinate);
     void mapproviderSelected(QAction* action);
 
+    void sendWaypoints();
+    void readWaypoints();
+
   signals:
     //void movePoint(QPointF newCoord);
     //void captureMapCoordinateClick(const QPointF coordinate); //ROCA
