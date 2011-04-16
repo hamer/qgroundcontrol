@@ -65,7 +65,6 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
     ui.linkType->setEditable(false);
     //ui.linkType->setEnabled(false);
 
-    ui.connectionType->addItem("MAVLink", QGC_PROTOCOL_MAVLINK);
     //ui.connectionType->addItem("GPS NMEA", QGC_PROTOCOL_NMEA);
 
     // Create action to open this menu
@@ -156,7 +155,7 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
         qDebug() << "Link is NOT a known link, can't open configuration window";
     }
 
-
+#if 0 // reduce height of link settins widget
     // Open details pane for MAVLink if necessary
     MAVLinkProtocol* mavlink = dynamic_cast<MAVLinkProtocol*>(protocol);
     if (mavlink != 0)
@@ -171,6 +170,7 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
     {
         qDebug() << "Protocol is NOT MAVLink, can't open configuration window";
     }
+#endif
 
     // Open details for UDP link if necessary
     // TODO
