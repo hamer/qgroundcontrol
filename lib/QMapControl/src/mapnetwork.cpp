@@ -25,6 +25,7 @@
 
 #include "mapnetwork.h"
 #include <QWaitCondition>
+#include <QSettings>
 namespace qmapcontrol
 {
     MapNetwork::MapNetwork(ImageManager* parent)
@@ -43,6 +44,10 @@ namespace qmapcontrol
 
     void MapNetwork::loadImage(const QString& host, const QString& url)
     {
+        // dont load images when network disabled
+        if (MapNetBlocker::instance()->isBlocked())
+            return;
+
         // prevent agressive loading unexistent tiles
         if (urlBlacklist.contains(url))
             return;
@@ -157,5 +162,28 @@ namespace qmapcontrol
         // do not set proxy on qt/extended
         http->setProxy(host, port);
 #endif
+    }
+
+    MapNetBlocker *MapNetBlocker::_instance = 0;
+    MapNetBlocker *MapNetBlocker::instance(QObject *parent)
+    {
+        if (_instance == 0)
+        {
+            _instance = new MapNetBlocker(parent);
+        }
+
+        return _instance;
+    }
+
+    void MapNetBlocker::setBlock(int blocked)
+    {
+        if (mx.tryLock())
+        {
+            QSettings s;
+            s.setValue("netBlocked", blocked);
+            this->blocked = bool(blocked);
+
+            mx.unlock();
+        }
     }
 }

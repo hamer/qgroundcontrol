@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>310</height>
+    <height>372</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,8 @@
       <attribute name="toolTip">
        <string>General Settings</string>
       </attribute>
-      <layout class="QGridLayout" name="generalPaneGridLayout">
-       <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
         <widget class="QCheckBox" name="reconnectCheckBox">
          <property name="text">
           <string>Automatically reconnect last link on application startup</string>
@@ -35,7 +35,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item>
         <widget class="QRadioButton" name="nativeStyle">
          <property name="text">
           <string>Use native platform look and feel (Windows/Linux/Mac OS)</string>
@@ -45,17 +45,27 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item>
         <widget class="QRadioButton" name="indoorStyle">
          <property name="text">
           <string>Use indoor mission style (black background)</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item>
         <widget class="QRadioButton" name="outdoorStyle">
          <property name="text">
           <string>Use outdoor mission style (light background)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="netBlocker">
+         <property name="text">
+          <string>Block loading maps from Internet</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
          </property>
         </widget>
        </item>

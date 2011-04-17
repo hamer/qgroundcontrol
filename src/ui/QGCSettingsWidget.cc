@@ -16,6 +16,9 @@ QGCSettingsWidget::QGCSettingsWidget(QWidget *parent, Qt::WindowFlags flags) :
 {
     ui->setupUi(this);
 
+    QSettings s;
+    ui->netBlocker->setChecked(s.value("netBlocked").toInt());
+
     // Add all protocols
     QList<ProtocolInterface*> protocols = LinkManager::instance()->getProtocols();
     foreach (ProtocolInterface* protocol, protocols)
@@ -52,11 +55,13 @@ QGCSettingsWidget::QGCSettingsWidget(QWidget *parent, Qt::WindowFlags flags) :
     connect(ui->indoorStyle, SIGNAL(clicked()), MainWindow::instance(), SLOT(loadIndoorStyle()));
     connect(ui->outdoorStyle, SIGNAL(clicked()), MainWindow::instance(), SLOT(loadOutdoorStyle()));
 
+    connect(ui->netBlocker, SIGNAL(stateChanged(int)), MapNetBlocker::instance(), SLOT(setBlock(int)));
+
     // Close / destroy
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(deleteLater()));
 
     // Set layout options
-    ui->generalPaneGridLayout->setAlignment(Qt::AlignTop);
+    //ui->generalPaneGridLayout->setAlignment(Qt::AlignTop);
 }
 
 QGCSettingsWidget::~QGCSettingsWidget()

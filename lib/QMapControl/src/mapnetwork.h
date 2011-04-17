@@ -76,5 +76,26 @@ namespace qmapcontrol
     private slots:
         void requestFinished(int id, bool error);
     };
+
+    class MapNetBlocker : public QObject
+    {
+        Q_OBJECT
+
+    public:
+        static MapNetBlocker *instance(QObject *parent = 0);
+        bool isBlocked() { return blocked; }
+
+    public slots:
+        void setBlock(int blocked);
+
+    protected:
+
+        MapNetBlocker(QObject *parent = 0) : QObject(parent), blocked(false) {}
+
+    private:
+        static MapNetBlocker *_instance;
+        bool blocked;
+        QMutex mx;
+    };
 }
 #endif

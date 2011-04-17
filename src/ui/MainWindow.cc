@@ -93,6 +93,15 @@ MainWindow::MainWindow(QWidget *parent):
 
     settings.sync();
 
+    // init blocker with parent
+    MapNetBlocker::instance(this);
+    if (!settings.contains("netBlocked"))
+    {
+        settings.setValue("netBlocked", 0);
+    }
+
+    MapNetBlocker::instance()->setBlock(settings.value("netBlocked").toInt());
+
     // Setup user interface
     ui.setupUi(this);
 
