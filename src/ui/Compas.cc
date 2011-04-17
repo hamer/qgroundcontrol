@@ -42,14 +42,14 @@ void Compas::updateHeading(UASInterface* uas, double heading)
     if (heading != this->heading)
     {
         this->heading = heading;
-        setValue(heading + 180.0);
+        setValue(heading);
     }
 }
 
 void Compas::updateSpeed(UASInterface*, double x, double y, double z, quint64 usec)
 {
     Q_UNUSED(usec);
-    totalSpeed = qSqrt(x*x + y*y + z*z) / 10.0;
+    totalSpeed = qSqrt(x*x + y*y + z*z) * 10.0 / 3.6;
 
     update();
 }
@@ -65,5 +65,5 @@ void Compas::paintEvent(QPaintEvent *event)
     p.setPen(Qt::black);
     p.setBackgroundMode(Qt::OpaqueMode);
     p.setBackground(QBrush(QColor(255, 255, 255, 64)));
-    p.drawText(rct, QString("%1 m/s").arg(totalSpeed, 8, 'f', 3), QTextOption(Qt::AlignCenter));
+    p.drawText(rct, QString("%1 km/h").arg(totalSpeed, 8, 'f', 3), QTextOption(Qt::AlignCenter));
 }
