@@ -99,33 +99,20 @@ namespace qmapcontrol
 
     Geometry* Layer::get_Geometry(int index)
     {
-        Geometry* geo = NULL;
         if(geometrySelected)
         {
-            geo = geometrySelected;
+            return geometrySelected;
         }
-        else
+
+        foreach(Geometry *geometry, geometries)
         {
-            for(int i = 0; i <= geometries.size(); i++)
+            if(geometry->name() == QString::number(index))
             {
-                Geometry *geometry = geometries[i];
-                if(geometry->name() == QString::number(index))
-                {
-                  geo = geometry;
-                }
+                return geometry;
             }
-
-//           foreach(Geometry *geometry, geometries)
-//           {
-
-//               if(geometry->name() == QString::number(index))
-//               {
-//                   return geometry;
-//               }
-
-//           }
         }
-        return geo;
+
+        return 0;
     }
 
     bool Layer::isVisible() const

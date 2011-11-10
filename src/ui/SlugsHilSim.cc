@@ -324,6 +324,7 @@ void SlugsHilSim::commandDatagramToSimulink()
     mavlink_pwm_commands_t* pwdC;
 
     if(pwdC != NULL){
+        111111111111111
     }
 
     QByteArray data;

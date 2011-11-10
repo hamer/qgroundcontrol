@@ -21,6 +21,6 @@ namespace OpalRT
         OpalGetLastErrMsg(buf, sizeof(buf), &len);
         lastErrorMsg.clear();
         lastErrorMsg.append(buf);
-        delete buf;
+        delete[] buf;
     }
 }

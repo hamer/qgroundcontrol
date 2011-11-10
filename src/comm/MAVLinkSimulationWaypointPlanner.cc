@@ -183,6 +183,7 @@ MAVLinkSimulationWaypointPlanner::MAVLinkSimulationWaypointPlanner(MAVLinkSimula
     QObject(parent),
     link(parent),
     idle(false),
+    posReached(false),
     current_active_wp_id(-1),
     timestamp_lastoutside_orbit(0),
     timestamp_firstinside_orbit(0),

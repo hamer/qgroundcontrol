@@ -48,6 +48,7 @@ MAVLinkProtocol::MAVLinkProtocol() :
         m_paramRewriteTimeout(500),
         m_paramGuardEnabled(true),
         m_actionGuardEnabled(false),
+        m_multiplexingEnabled(false),
         m_actionRetransmissionTimeout(100),
         versionMismatchIgnore(false),
         systemId(QGC::defaultSystemId)
