@@ -66,7 +66,4 @@ void Compas::paintEvent(QPaintEvent *event)
     p.setBackgroundMode(Qt::OpaqueMode);
     p.setBackground(QBrush(QColor(255, 255, 255, 64)));
     p.drawText(rct, QString("%1 km/h").arg(totalSpeed, 8, 'f', 3), QTextOption(Qt::AlignCenter));
-
-    int *a = 0;
-    *a = 0;
 }
